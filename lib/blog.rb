@@ -3,7 +3,7 @@ require 'ostruct'
 require 'time'
 require 'yaml'
 require 'redcarpet'
-# $LOAD_PATH.unshift(File.dirname(__FILE__))
+$LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'github_hook'
 
 class Blog < Sinatra::Base 
