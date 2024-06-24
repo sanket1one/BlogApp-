@@ -4,14 +4,16 @@
     <title>Add new Blog</title>
 </head>
 <body>
-    <form class="blog-form" action="/addBlog" method="post">
-        <div class="filler">
-            <label for="title">Title:</label><br>
-            <input type="text" id="title" name="title"><br>
-            <label for="content">Content:</label><br>
-            <textarea id="content" name="content"></textarea><br>
-        </div>
-        <input type="submit" value="Submit">
-    </form>
+    <div class="add-blog-container">
+        <form class="blog-form" action="/addBlog" method="post">
+            <div class="filler">
+                <label for="title">Title:</label><br>
+                <input type="text" id="title" name="title"><br>
+                <label for="content">Content:</label><br>
+                <textarea id="content" name="content"></textarea><br>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
 </body>
 </html>
