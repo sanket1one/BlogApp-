@@ -4,8 +4,8 @@ require 'ostruct'
 require 'time'
 require 'yaml'
 require 'redcarpet'
-# $LOAD_PATH.unshift(File.dirname(__FILE__))
-# require 'github_hook'
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+require 'github_hook'
 
 class MyApp < Sinatra::Base
     configure :development do
@@ -14,12 +14,12 @@ class MyApp < Sinatra::Base
 end
 
 class Blog < Sinatra::Base 
-    # use GithubHook 
+    use GithubHook 
 
     enable :method_override
     set :root, File.expand_path('../../',__FILE__)
     set :articles,[]
-    # set :app_file,__FILE__
+    set :app_file,__FILE__
 
     # method to parse the markdown used in post.erb
     helpers do
@@ -108,14 +108,14 @@ class Blog < Sinatra::Base
         slug = params[:slug]
         title = params[:title]
         content = params[:content]
-        date = Date.today.strftime("%Y-%m-%d") # Format the date
+        date = Date.today.strftime("%Y-%m-%d")  # Format the date
         new_slug = title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
-    
+
         metadata = {
             'title' => title,
             'date' => date
         }.to_yaml
-    
+
         File.open("articles/#{slug}.md", 'w') do |file|
             file.puts metadata
             file.puts "\n"
@@ -125,16 +125,15 @@ class Blog < Sinatra::Base
         # Find the article in the articles list and update it
         article = settings.articles.find { |a| a.slug == slug }
         if article
-            article.title = title
-            article.content = content
-            article.date = Time.parse(date)
-            article.slug = new_slug
+        article.title = title
+        article.content = content
+        article.date = Time.parse(date)
+        article.slug = new_slug
         end
-    
+
         if slug != new_slug
             File.rename("articles/#{slug}.md", "articles/#{new_slug}.md")
         end
-
     
         redirect "/"
     end
