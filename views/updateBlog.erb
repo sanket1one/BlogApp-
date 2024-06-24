@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Update Blog</title>
+</head>
+<body>
+    <div class="updateForm_container">
+        <form  class="updateForm"action="/<%= article.slug %>" method="post">
+            <div>
+                <input type="hidden" name="_method" value="put">
+                <label for="title">Title:</label><br>
+                <input type="text" id="title" name="title" value="<%= article.title %>"><br>
+                <label for="content">Content:</label><br>
+                <textarea id="content" name="content"><%= article.content %></textarea><br>
+            </div>
+            <div>
+                <input class='submit' type="submit" value="Update">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

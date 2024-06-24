@@ -1,3 +1,21 @@
-<%settings.articles.each do |article| %>
-    <%= erb :post, :locals => { :article => article}%>
+<% settings.articles.each do |article| %>
+    <article>
+        <header>
+            <h1>
+                <a class="blog-heading" href="<%= url(article.slug) %>"> <%= article.title %></a>
+            </h1>
+            <time class="timeago" datetime="<%= article.date.xmlschema %>">
+                <%= article.date.strftime "%Y/%m/%d" %>
+            </time>
+        </header>
+        <section class="content">
+            <% words = markdown(article.content).split(' ') %>
+            <% if words.length > 50 %>
+                <%= words[0...50].join(' ') %>...
+                <a href="<%= url(article.slug) %>">Read More</a>
+            <% else %>
+                <%= markdown article.content %>
+            <% end %>
+        </section>
+    </article>
 <% end %>

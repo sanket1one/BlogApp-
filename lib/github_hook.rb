@@ -10,7 +10,7 @@ class GithubHook < Sinatra::Base
         set :commit_date,date
     end
 
-    set(:autopull) {production? }
+    set(:autopull) {production?}
     parse_git
 
     before do 
@@ -21,7 +21,7 @@ class GithubHook < Sinatra::Base
 
     post '/update' do
         settings.parse_git
-        
+
         app.settings.reset!
         load app.settings.app_file
 
